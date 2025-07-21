@@ -1,20 +1,20 @@
 package com.frank.tic_tac_toe_app
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.widget.Button
-import android.widget.TextView
+import androidx.activity.ComponentActivity
+import androidx.activity.compose.setContent
+import androidx.compose.material.MaterialTheme
+import androidx.compose.material.Surface
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
-
-        val textView = findViewById<TextView>(R.id.textView)
-        val button = findViewById<Button>(R.id.button)
-
-        button.setOnClickListener {
-            textView.text = "Hello Vibe Coder"
+        setContent {
+            MaterialTheme {
+                Surface {
+                    TicTacToeGame()
+                }
+            }
         }
     }
 }
