@@ -25,6 +25,7 @@ fun TicTacToeGame() {
     var winningCells by remember { mutableStateOf(emptyList<Pair<Int, Int>>()) }
     var xScore by remember { mutableStateOf(0) }
     var oScore by remember { mutableStateOf(0) }
+    var nextStartingPlayer by remember { mutableStateOf(true) } // true for X, false for O
 
     fun checkWinner(): Pair<String?, List<Pair<Int, Int>>> {
         // Rows
@@ -105,9 +106,10 @@ fun TicTacToeGame() {
         }
         Spacer(modifier = Modifier.height(24.dp))
         Button(onClick = {
+            nextStartingPlayer = !nextStartingPlayer
             board = List(3) { MutableList(3) { "" } }
-            xTurn = true
-            status = "Player X's turn"
+            xTurn = nextStartingPlayer
+            status = if (nextStartingPlayer) "Player X's turn" else "Player O's turn"
             gameOver = false
             winningCells = emptyList()
         },
@@ -128,9 +130,10 @@ fun TicTacToeGame() {
             onClick = {
                 xScore = 0
                 oScore = 0
+                nextStartingPlayer = !nextStartingPlayer
                 board = List(3) { MutableList(3) { "" } }
-                xTurn = true
-                status = "Player X's turn"
+                xTurn = nextStartingPlayer
+                status = if (nextStartingPlayer) "Player X's turn" else "Player O's turn"
                 gameOver = false
                 winningCells = emptyList()
             },
